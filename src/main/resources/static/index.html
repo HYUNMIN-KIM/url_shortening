@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>URL SHORTENING PROGRAM</title>
+</head>
+<body>
+<tr>
+<input type="text" id="inputUrl" name="url">
+<button id="urlButton" onclick="getShortenURL()">Click</button>
+
+    <br>
+
+    <a id="shortUrl" onclick="redirectURL()"></a>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script>
+    function getShortenURL()  {
+        var inputUrl = $("#inputUrl").val();
+
+        var data = {};
+        data["inputUrl"] = inputUrl;
+
+        $.ajax({
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(data),
+            url: "/shortening",
+            type: "POST",
+            success: function (response) {
+                 $("#shortUrl").text(response.message);
+
+                 if (response.status === "success") {
+
+                 }
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function redirectURL(){
+
+        var shortUrl = $("#shortUrl").html();
+        var data = {};
+        data["shortUrl"] = shortUrl;
+        console.log(shortUrl);
+        $.ajax({
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(data),
+            url: "/redirect",
+            type: "POST",
+            success: function (response) {
+                console.log(response.message);
+
+                window.location.href = "/redirectURL?url=" + response.message;
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+
+    }
+</script>
+</body>
+</html>
