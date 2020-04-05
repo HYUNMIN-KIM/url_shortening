@@ -7,19 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
+
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
-import java.util.Iterator;
+
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+
 
 @Controller
 public class ShorteningController {

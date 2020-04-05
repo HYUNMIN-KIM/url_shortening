@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Service
-public class UrlMapperSerivceImpl {
+public class UrlMapperSerivceImpl implements UrlMapperService {
 
 
     private List<UrlVO> urlVOList = new ArrayList<>();
