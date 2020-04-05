@@ -32,36 +32,36 @@ public class ShorteningServiceImpl implements ShorteningService {
         return result;
     }
 
-    public String getOriginalURL(String shortURL){
-       for(Map.Entry<String, String> entry : this.mapURL.entrySet()){
-           if(entry.getKey().equalsIgnoreCase(shortURL))
-               return entry.getValue();
-       }
-
-       return null;
-    }
-
-    public boolean isShortingURL(String longURL){
-        for(Map.Entry<String, String> entry : this.mapURL.entrySet()){
-            if(entry.getKey().equalsIgnoreCase(longURL))
-                return true;
-        }
-
-        return false;
-    }
-
-    public boolean isNull(){
-        if(this.mapURL.isEmpty())
-            return true;
-        return false;
-    }
-
-
-    public void setMapURL(String shortUrl, String longUrl) {
-        if(mapURL.keySet().contains(shortUrl))
-            return;
-        else
-            mapURL.put(shortUrl,longUrl);
-
-    }
+//    public String getOriginalURL(String shortURL){
+//       for(Map.Entry<String, String> entry : this.mapURL.entrySet()){
+//           if(entry.getKey().equalsIgnoreCase(shortURL))
+//               return entry.getValue();
+//       }
+//
+//       return null;
+//    }
+//
+//    public boolean isShortingURL(String longURL){
+//        for(Map.Entry<String, String> entry : this.mapURL.entrySet()){
+//            if(entry.getKey().equalsIgnoreCase(longURL))
+//                return true;
+//        }
+//
+//        return false;
+//    }
+//
+//    public boolean isNull(){
+//        if(this.mapURL.isEmpty())
+//            return true;
+//        return false;
+//    }
+//
+//
+//    public void setMapURL(String shortUrl, String longUrl) {
+//        if(mapURL.keySet().contains(shortUrl))
+//            return;
+//        else
+//            mapURL.put(shortUrl,longUrl);
+//
+//    }
 }

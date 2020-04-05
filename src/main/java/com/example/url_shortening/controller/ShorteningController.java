@@ -1,6 +1,7 @@
 package com.example.url_shortening.controller;
 
 import com.example.url_shortening.service.ShorteningServiceImpl;
+import com.example.url_shortening.service.UrlMapperSerivceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,9 @@ public class ShorteningController {
     @Autowired
     ShorteningServiceImpl shorteningService;
 
+    @Autowired
+    UrlMapperSerivceImpl urlMapperSerivce;
+
     @ResponseBody
     @RequestMapping(value = "/shortening", method = RequestMethod.POST)
     public Map<String, Object> urlShortening(@RequestBody Map<String, Object> param) throws NoSuchAlgorithmException{
@@ -39,19 +43,22 @@ public class ShorteningController {
         }
         inputUrl = inputUrl.trim();
         String message = "";
-        if(shorteningService.isNull()){
-            String url = shorteningService.getShorteningURL(inputUrl);
-            message = "http://localhost/" + url;
-            shorteningService.setMapURL(message,inputUrl);
+        if(!urlMapperSerivce.isValidUrl(inputUrl)){
+           message="저장되지 않은 url이거나 올바른 url이 아닙니다.";
             result.put("shortUrl",message);
         }
-        else if(!shorteningService.isShortingURL(inputUrl)) {
+
+        else if(!urlMapperSerivce.isShortingURL(inputUrl)) {
             String url = shorteningService.getShorteningURL(inputUrl);
             message = "http://localhost/" + url;
-            shorteningService.setMapURL(message,inputUrl);
+            urlMapperSerivce.setMapURL(message,inputUrl);
+            urlMapperSerivce.addRequestNum(inputUrl);
             result.put("shortUrl",message);
-        }else{
-            message = shorteningService.getOriginalURL(inputUrl);
+            result.put("requestNum", urlMapperSerivce.getRequestNum(inputUrl));
+        }
+        else{
+            message = urlMapperSerivce.getOriginalURL(inputUrl);
+            urlMapperSerivce.addRequestNum(inputUrl);
             result.put("longUrl",message);
 
         }
@@ -59,26 +66,26 @@ public class ShorteningController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/redirect", method = RequestMethod.POST)
-    public Map<String, Object> redirectUrl(@RequestBody Map<String, Object> param)  throws IOException {
-
-
-        Iterator<String> paramIter = param.keySet().iterator();
-        String result = "";
-        while(paramIter.hasNext()){
-            String key = paramIter.next();
-            String val = (String) param.get(key);
-            result = val;
-        }
-        result  = shorteningService.getOriginalURL(result);
-
-
-        Map<String, Object> map = new HashMap<>();
-        map.put("message",result);
-
-        return map;
-
-    }
+//    @RequestMapping(value = "/redirect", method = RequestMethod.POST)
+//    public Map<String, Object> redirectUrl(@RequestBody Map<String, Object> param)  throws IOException {
+//
+//
+//        Iterator<String> paramIter = param.keySet().iterator();
+//        String result = "";
+//        while(paramIter.hasNext()){
+//            String key = paramIter.next();
+//            String val = (String) param.get(key);
+//            result = val;
+//        }
+//        result  = urlMapperSerivce.getOriginalURL(result);
+//
+//
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("message",result);
+//
+//        return map;
+//
+//    }
 
     @RequestMapping(value="/redirectURL", method = RequestMethod.GET)
     public RedirectView goTo(HttpServletRequest httpServletRequest){

@@ -1,17 +1,91 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>URL SHORTENING PROGRAM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: Arial;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        div.example input[type=text] {
+            padding: 10px;
+            font-size: 17px;
+            border: 1px solid grey;
+            float: left;
+            width: 80%;
+            background: #f1f1f1;
+        }
+        div.example button {
+            float: left;
+            width: 20%;
+            padding: 10px;
+            background: #2196F3;
+            color: white;
+            font-size: 17px;
+            border: 1px solid grey;
+            border-left: none;
+            cursor: pointer;
+        }
+
+        form.example button:hover {
+            background: #0b7dda;
+        }
+
+        form.example::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
 </head>
 <body>
-<tr>
-<input type="text" id="inputUrl" name="url">
-<button id="urlButton" onclick="getShortenURL()">Click</button>
 
-    <br>
+<h2>URL Shortening Program</h2>
 
-    <a id="shortUrl" onclick="redirectURL()"></a>
+
+<div class="example" >
+    <input type="text" id="inputUrl" placeholder="url.." name="inputUrl">
+    <button onclick="getShortenURL()"><i class="fa fa-search"></i></button>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<table id="resultPage">
+    <tr>
+        <th>short url</th>
+        <th>The number of request</th>
+    </tr>
+    <tr>
+        <td id="shortUrl"></td>
+        <td id="requestNum"></td>
+    </tr>
+</table>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script>
@@ -29,6 +103,8 @@
             type: "POST",
             success: function (response) {
                  $("#shortUrl").text(response.shortUrl);
+                $("#requestNum").text(response.requestNum);
+
                 if(response.shortUrl === undefined)
                  window.location.href = "/redirectURL?url=" + response.longUrl;
 
@@ -40,30 +116,30 @@
         });
     }
 
-    function redirectURL(){
-
-        var shortUrl = $("#shortUrl").html();
-        var data = {};
-        data["shortUrl"] = shortUrl;
-        console.log(shortUrl);
-        $.ajax({
-            contentType: "application/json",
-            dataType: "json",
-            data: JSON.stringify(data),
-            url: "/redirect",
-            type: "POST",
-            success: function (response) {
-                console.log(response.message);
-
-
-
-            },
-            error: function (error) {
-                console.log(error);
-            }
-        });
-
-    }
+    // function redirectURL(){
+    //
+    //     var shortUrl = $("#shortUrl").html();
+    //     var data = {};
+    //     data["shortUrl"] = shortUrl;
+    //     console.log(shortUrl);
+    //     $.ajax({
+    //         contentType: "application/json",
+    //         dataType: "json",
+    //         data: JSON.stringify(data),
+    //         url: "/redirect",
+    //         type: "POST",
+    //         success: function (response) {
+    //             console.log(response.message);
+    //
+    //
+    //
+    //         },
+    //         error: function (error) {
+    //             console.log(error);
+    //         }
+    //     });
+    //
+    // }
 </script>
 </body>
 </html>

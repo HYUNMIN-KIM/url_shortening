@@ -6,6 +6,12 @@ public class UrlVO {
     private String longUrl;
     private int requestNum;
 
+    public UrlVO(String shortUrl, String longUrl) {
+        this.shortUrl = shortUrl;
+        this.longUrl = longUrl;
+        this.requestNum = 0;
+    }
+
     public String getShortUrl() {
         return shortUrl;
     }
