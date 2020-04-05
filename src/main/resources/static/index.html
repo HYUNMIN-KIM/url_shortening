@@ -28,11 +28,10 @@
             url: "/shortening",
             type: "POST",
             success: function (response) {
-                 $("#shortUrl").text(response.message);
+                 $("#shortUrl").text(response.shortUrl);
+                if(response.shortUrl === undefined)
+                 window.location.href = "/redirectURL?url=" + response.longUrl;
 
-                 if (response.status === "success") {
-
-                 }
 
             },
             error: function (error) {
@@ -56,7 +55,7 @@
             success: function (response) {
                 console.log(response.message);
 
-                window.location.href = "/redirectURL?url=" + response.message;
+
 
             },
             error: function (error) {

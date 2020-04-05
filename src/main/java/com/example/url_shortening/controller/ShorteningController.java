@@ -28,7 +28,7 @@ public class ShorteningController {
 
     @ResponseBody
     @RequestMapping(value = "/shortening", method = RequestMethod.POST)
-    public Map<String, Object> urlShortening(@RequestBody Map<String, Object> param) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
+    public Map<String, Object> urlShortening(@RequestBody Map<String, Object> param) throws NoSuchAlgorithmException{
         Map<String, Object> result = new HashMap<>();
 
         String inputUrl = (String) param.get("inputUrl");
@@ -37,17 +37,24 @@ public class ShorteningController {
 
             return null;
         }
-
         inputUrl = inputUrl.trim();
+        String message = "";
+        if(shorteningService.isNull()){
+            String url = shorteningService.getShorteningURL(inputUrl);
+            message = "http://localhost/" + url;
+            shorteningService.setMapURL(message,inputUrl);
+            result.put("shortUrl",message);
+        }
+        else if(!shorteningService.isShortingURL(inputUrl)) {
+            String url = shorteningService.getShorteningURL(inputUrl);
+            message = "http://localhost/" + url;
+            shorteningService.setMapURL(message,inputUrl);
+            result.put("shortUrl",message);
+        }else{
+            message = shorteningService.getOriginalURL(inputUrl);
+            result.put("longUrl",message);
 
-
-        String url = shorteningService.getShorteningURL(inputUrl);
-
-
-        String message = "http://localhost/" + url;
-
-        shorteningService.setMapURL(message,inputUrl);
-        result.put("message",message);
+        }
         return result;
     }
 

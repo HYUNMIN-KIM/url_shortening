@@ -7,12 +7,12 @@ public class SHA256 {
 	final private static String ALGORITHM = "SHA-256";
 
 	public String encode(byte[] param) throws NoSuchAlgorithmException {
-		MessageDigest md;
+		MessageDigest messageDigest;
 		String endcodedData = null;
 		try {
-			md = MessageDigest.getInstance(ALGORITHM);
+			messageDigest = MessageDigest.getInstance(ALGORITHM);
 
-			byte[] hash = md.digest(param);
+			byte[] hash = messageDigest.digest(param);
 			StringBuffer hexString = new StringBuffer();
 
 			for (int i = 0; i < hash.length; i++) {
