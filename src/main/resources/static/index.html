@@ -85,6 +85,7 @@
         <td id="requestNum"></td>
     </tr>
 </table>
+<p id="message"></p>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -102,10 +103,19 @@
             url: "/shortening",
             type: "POST",
             success: function (response) {
-                 $("#shortUrl").text(response.shortUrl);
-                $("#requestNum").text(response.requestNum);
+                if(response.msg===undefined) {
+                    $("#resultPage").show();
+                    $("#shortUrl").text(response.shortUrl);
+                    $("#requestNum").text(response.requestNum);
+                    $("#message").hide();
+                }
+                if(response.msg!== undefined) {
+                    $("#resultPage").hide();
+                    $("#message").show();
+                    $("#message").text(response.msg);
+                }
 
-                if(response.shortUrl === undefined)
+                if(response.shortUrl === undefined && response.msg===undefined)
                  window.location.href = "/redirectURL?url=" + response.longUrl;
 
 

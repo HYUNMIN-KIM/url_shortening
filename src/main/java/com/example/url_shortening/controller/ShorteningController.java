@@ -36,19 +36,22 @@ public class ShorteningController {
         Map<String, Object> result = new HashMap<>();
 
         String inputUrl = (String) param.get("inputUrl");
-
-        if (inputUrl == null || "".equals(inputUrl) || inputUrl.trim().length() == 0) {
-
-            return null;
-        }
         inputUrl = inputUrl.trim();
         String message = "";
-        if(!urlMapperSerivce.isValidUrl(inputUrl)){
-           message="저장되지 않은 url이거나 올바른 url이 아닙니다.";
-            result.put("shortUrl",message);
+        if (!inputUrl.startsWith("http://") && !inputUrl.startsWith("https://") ) {
+            message = "올바른 url 형식이 아닙니다.(http:// or https:// 사용해주세요.)";
+            result.put("msg",message);
+            return result;
+
         }
 
-        else if(!urlMapperSerivce.isShortingURL(inputUrl)) {
+        if(!urlMapperSerivce.isValidUrl(inputUrl)){
+           message="저장되지 않은 url이거나 올바른 url이 아닙니다.";
+            result.put("msg",message);
+            return result;
+        }
+
+       if(!urlMapperSerivce.isShortingURL(inputUrl)) {
             String url = shorteningService.getShorteningURL(inputUrl);
             message = "http://localhost/" + url;
             urlMapperSerivce.setMapURL(message,inputUrl);
