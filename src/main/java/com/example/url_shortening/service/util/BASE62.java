@@ -1,6 +1,6 @@
 package com.example.url_shortening.service.util;
 
-public class Base62 {
+public class BASE62 {
 
     static final char[] BASE62 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
 
