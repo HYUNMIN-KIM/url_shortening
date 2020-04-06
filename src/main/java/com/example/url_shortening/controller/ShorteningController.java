@@ -32,6 +32,12 @@ public class ShorteningController {
         String inputUrl = (String) param.get("inputUrl");
         inputUrl = inputUrl.trim();
         String message = "";
+        inputUrl = inputUrl.trim();
+        if (inputUrl == null || "".equals(inputUrl) || inputUrl.trim().length() == 0) {
+            message = "url을 입력해주세요.";
+            result.put("msg",message);
+            return result;
+        }
         if (!inputUrl.startsWith("http://") && !inputUrl.startsWith("https://") ) {
             message = "올바른 url 형식이 아닙니다.(http:// or https:// 사용해주세요.)";
             result.put("msg",message);
@@ -52,6 +58,7 @@ public class ShorteningController {
             urlMapperSerivce.addRequestNum(inputUrl);
             result.put("shortUrl",message);
             result.put("requestNum", urlMapperSerivce.getRequestNum(inputUrl));
+
         }
         else{
             message = urlMapperSerivce.getOriginalURL(inputUrl);
