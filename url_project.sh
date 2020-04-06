@@ -3,4 +3,4 @@
 
 mvn clean
 mvn package
-java -jar target/url_shortening-0.1 jar
+java -jar target/url_shortening-0.1.jar
