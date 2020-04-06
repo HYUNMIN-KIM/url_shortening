@@ -25,6 +25,7 @@ Springboot v2.2.6
       4. url_project.sh 스크립트를 실행한다.
       (해당 스크립트는 메이븐으로 시스템을 빌드한 후 프로젝트 실행까지 수행한다.)
       
+      
       * 실행순서
       1. git clone https://github.com/HYUNMIN-KIM/url_shortening.git
       2. cd url_shortening
