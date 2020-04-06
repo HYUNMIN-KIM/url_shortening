@@ -15,15 +15,15 @@ public class ShorteningServiceImpl implements ShorteningService {
         String result = "";
         String sha256Hash = sha256.encode(url.getBytes());
 
-            String digits = sha256Hash.substring(0, 12);
-            long urlKey = Long.parseLong(digits, 16);
 
+        String digits = sha256Hash.substring(0, 12);
 
+        long urlKey = Long.parseLong(digits, 16);
 
-            result = base62.encode(urlKey);
+        result = base62.encode(urlKey);
 
-            if(result.length()>8)
-                return result.substring(0,8);
+        if(result.length()>8)
+            return result.substring(0,8);
 
         return result;
     }
