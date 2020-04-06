@@ -8,24 +8,24 @@ public class SHA256 {
 
 	public String encode(byte[] param) throws NoSuchAlgorithmException {
 		MessageDigest messageDigest;
-		String endcodedData = null;
+		String endcoding = null;
 		try {
 			messageDigest = MessageDigest.getInstance(ALGORITHM);
 
 			byte[] hash = messageDigest.digest(param);
-			StringBuffer hexString = new StringBuffer();
+			StringBuffer sb = new StringBuffer();
 
 			for (int i = 0; i < hash.length; i++) {
 				String hex = Integer.toHexString(0xff & hash[i]);
 				if (hex.length() == 1) {
-					hexString.append('0');
+					sb.append('0');
 				}
-				hexString.append(hex);
+				sb.append(hex);
 			}
-			endcodedData = hexString.toString();
+			endcoding = sb.toString();
 		} catch (NoSuchAlgorithmException e) {
 			throw new NoSuchAlgorithmException(ALGORITHM + " is not a proper algorithm.");
 		}
-		return endcodedData;
+		return endcoding;
 	}
 }
