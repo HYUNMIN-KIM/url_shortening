@@ -17,12 +17,13 @@ Url shortening 프로젝트는 긴 Url을 짧게 만들어서 짧은 url로 사�
       디렉토리 안에 url_project.sh 스크립트 파일이 있다. 해당 스크립트의 권한을 변경한다.
       url_project.sh 스크립트를 실행한다.
       (해당 스크립트는 메이븐으로 시스템을 빌드한 후 프로젝트 실행까지 수행한다.)
---------------------------실행순서---------------------------------------------      
+      
+      * 실행순서
       1. git clone https://github.com/HYUNMIN-KIM/url_shortening.git
       2. cd url_shortening
       3. chmod 755 url_project.sh
       4. /url_project.sh
-------------------------------------------------------------------------------      
+ 
       * url_project.sh가 수행하는 것.
        1. maven build
        2. 프로젝트 실행.
