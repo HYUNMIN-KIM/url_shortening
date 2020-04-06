@@ -28,8 +28,8 @@ Url shortening 프로젝트는 긴 Url을 짧게 만들어서 짧은 url로 사�
  
  
 *url_project.sh가 수행하는 것
-maven clean
-maven package 
+maven clean,
+maven package, 
 프로젝트 실행.
       
       
