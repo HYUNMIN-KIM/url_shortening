@@ -2,4 +2,4 @@
 #!/bin/bash
 
 mvn build
-java -jar target
+java -jar target/url_shortening-0.1 jar
