@@ -13,7 +13,8 @@ Springboot v2.2.6
   1. url은 http:// 혹은 https://로 시작하는 것으로 한다.
   2. 짧은 Url과 원래 Url이 요청되었을 때 모두 요청 수 정보는 갱신된다.
   3. 짧은 url은 http://localhost/ 로 시작한다.
-  4. 서버 재시작 시 모든 요청정보는 사라진다.(memory 사용)
+  4.http://www.musinsa.com 과 https://www.musinsa.com 은 각각 다른 짧은 url으로 반환한다.
+  5. 서버 재시작 시 모든 요청정보는 사라진다.(inmemory에 저장)
   
   
  * 사용방법 및 순서 
