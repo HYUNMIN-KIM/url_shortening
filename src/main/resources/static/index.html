@@ -65,7 +65,7 @@
 
 
 <div class="example" >
-    <input type="text" id="inputUrl" placeholder="url.." name="inputUrl">
+    <input type="text" onKeyDown="onKeyDown()" id="inputUrl" placeholder="url.." name="inputUrl">
     <button onclick="getShortenURL()"><i class="fa fa-search"></i></button>
 </div>
 
@@ -93,6 +93,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script>
+    function onKeyDown(){
+        // 엔터키의 코드는 13입니다.
+        if(event.keyCode == 13){
+            getShortenURL();  // 실행할 이벤트
+        }
+    }
+    
     function getShortenURL()  {
         var inputUrl = $("#inputUrl").val();
 
