@@ -16,6 +16,7 @@ Springboot v2.2.6
   4.http://www.musinsa.com 과 https://www.musinsa.com 은 각각 다른 짧은 url으로 반환한다.
   5. 서버 재시작 시 모든 요청정보는 사라진다.(inmemory에 저장)
   
+  default 포트는 8090을 사용하였습니다. (server.port = 8090)
   
  * 사용방법 및 순서 
       리눅스 상에서 해당 프로젝트를 clone 한다.(1번)
