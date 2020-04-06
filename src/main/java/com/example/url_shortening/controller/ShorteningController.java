@@ -1,7 +1,7 @@
 package com.example.url_shortening.controller;
 
-import com.example.url_shortening.service.ShorteningServiceImpl;
-import com.example.url_shortening.service.UrlMapperSerivceImpl;
+import com.example.url_shortening.service.ShorteningService;
+import com.example.url_shortening.service.UrlMapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +17,14 @@ import java.util.Map;
 
 @Controller
 public class ShorteningController {
+    private ShorteningService shorteningService;
+    private UrlMapperService urlMapperService;
 
     @Autowired
-    ShorteningServiceImpl shorteningService;
-
-    @Autowired
-    UrlMapperSerivceImpl urlMapperSerivce;
+    public ShorteningController(ShorteningService shorteningService, UrlMapperService urlMapperService){
+        this.shorteningService = shorteningService;
+        this.urlMapperService = urlMapperService;
+    }
 
     @ResponseBody
     @RequestMapping(value = "/shortening", method = RequestMethod.POST)
@@ -33,11 +35,7 @@ public class ShorteningController {
         inputUrl = inputUrl.trim();
         String message = "";
         inputUrl = inputUrl.trim();
-        if (inputUrl == null || "".equals(inputUrl) || inputUrl.trim().length() == 0) {
-            message = "url을 입력해주세요.";
-            result.put("msg",message);
-            return result;
-        }
+
         if (!inputUrl.startsWith("http://") && !inputUrl.startsWith("https://") ) {
             message = "올바른 url 형식이 아닙니다.(http:// or https:// 사용해주세요.)";
             result.put("msg",message);
@@ -45,51 +43,33 @@ public class ShorteningController {
 
         }
 
-        if(!urlMapperSerivce.isValidUrl(inputUrl)){
+        if(!urlMapperService.isValidUrl(inputUrl)){
            message="저장되지 않은 url이거나 올바른 url이 아닙니다.";
             result.put("msg",message);
             return result;
         }
 
-       if(!urlMapperSerivce.isShortingURL(inputUrl)) {
+
+       if(!urlMapperService.isShortingURL(inputUrl)) {
             String url = shorteningService.getShorteningURL(inputUrl);
             message = "http://localhost/" + url;
-            urlMapperSerivce.setMapURL(message,inputUrl);
-            urlMapperSerivce.addRequestNum(inputUrl);
+            urlMapperService.setMapURL(message,inputUrl);
+            urlMapperService.addRequestNum(inputUrl);
             result.put("shortUrl",message);
-            result.put("requestNum", urlMapperSerivce.getRequestNum(inputUrl));
+            result.put("requestNum", urlMapperService.getRequestNum(inputUrl));
 
         }
         else{
-            message = urlMapperSerivce.getOriginalURL(inputUrl);
-            urlMapperSerivce.addRequestNum(inputUrl);
+            message = urlMapperService.getOriginalURL(inputUrl);
+            urlMapperService.addRequestNum(inputUrl);
+
             result.put("longUrl",message);
 
         }
         return result;
     }
 
-    @ResponseBody
-//    @RequestMapping(value = "/redirect", method = RequestMethod.POST)
-//    public Map<String, Object> redirectUrl(@RequestBody Map<String, Object> param)  throws IOException {
-//
-//
-//        Iterator<String> paramIter = param.keySet().iterator();
-//        String result = "";
-//        while(paramIter.hasNext()){
-//            String key = paramIter.next();
-//            String val = (String) param.get(key);
-//            result = val;
-//        }
-//        result  = urlMapperSerivce.getOriginalURL(result);
-//
-//
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("message",result);
-//
-//        return map;
-//
-//    }
+
 
     @RequestMapping(value="/redirectURL", method = RequestMethod.GET)
     public RedirectView goTo(HttpServletRequest httpServletRequest){

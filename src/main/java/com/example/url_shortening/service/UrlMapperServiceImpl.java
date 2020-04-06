@@ -9,10 +9,16 @@ import java.util.List;
 
 
 @Service
-public class UrlMapperSerivceImpl implements UrlMapperService {
+public class UrlMapperServiceImpl implements UrlMapperService {
 
 
     private List<UrlVO> urlVOList = new ArrayList<>();
+
+
+    @Override
+    public List<UrlVO> getAllList() {
+        return urlVOList;
+    }
 
     public String getOriginalURL(String shortURL){
         for(UrlVO uv : urlVOList){
@@ -23,9 +29,9 @@ public class UrlMapperSerivceImpl implements UrlMapperService {
         return null;
     }
 
-    public boolean isShortingURL(String longURL){
+    public boolean isShortingURL(String url){
         for(UrlVO uv : urlVOList){
-            if(uv.getShortUrl().equalsIgnoreCase(longURL)) {
+            if(uv.getShortUrl().equalsIgnoreCase(url)) {
                     return true;
             }
         }

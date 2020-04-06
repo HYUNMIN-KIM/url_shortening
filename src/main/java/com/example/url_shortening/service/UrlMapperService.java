@@ -1,12 +1,18 @@
 package com.example.url_shortening.service;
 
 
+import com.example.url_shortening.vo.UrlVO;
+
+import java.util.List;
 
 public interface UrlMapperService {
 
+
+    List<UrlVO> getAllList();
+
     String getOriginalURL(String shortURL);
 
-    boolean isShortingURL(String longURL);
+    boolean isShortingURL(String url);
 
     void setMapURL(String shortUrl, String longUrl);
 

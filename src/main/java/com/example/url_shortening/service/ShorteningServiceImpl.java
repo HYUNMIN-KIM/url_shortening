@@ -9,12 +9,6 @@ import java.security.NoSuchAlgorithmException;
 public class ShorteningServiceImpl implements ShorteningService {
 
 
-
-
-    public ShorteningServiceImpl(){
-
-    }
-
     public String getShorteningURL(String url) throws NoSuchAlgorithmException{
         SHA256 sha256 = new SHA256();
         BASE62 base62 = new BASE62();
@@ -25,10 +19,19 @@ public class ShorteningServiceImpl implements ShorteningService {
             long urlKey = Long.parseLong(digits, 16);
 
 
+
             result = base62.encode(urlKey);
 
+            if(result.length()>8)
+                return result.substring(0,8);
 
         return result;
+    }
+
+    public static void main(String[] args) throws NoSuchAlgorithmException {
+        ShorteningService shorteningService = new ShorteningServiceImpl();
+        System.out.println(shorteningService.getShorteningURL("http://www.naver.com"));
+
     }
 
 }
