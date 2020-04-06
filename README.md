@@ -19,10 +19,10 @@ Springboot v2.2.6
   default 포트는 8090을 사용하였습니다. (server.port = 8090)
   
  * 사용방법 및 순서 
-      리눅스 상에서 해당 프로젝트를 clone 한다.(1번)
-      clone 완료 후 해당 디렉토리인 url_shortening에 들어간다.
-      디렉토리 안에 url_project.sh 스크립트 파일이 있다. 해당 스크립트의 권한을 변경한다.
-      url_project.sh 스크립트를 실행한다.
+      1. 리눅스 상에서 해당 프로젝트를 clone 한다.(1번)
+      2. clone 완료 후 해당 디렉토리인 url_shortening에 들어간다.
+      3. 디렉토리 안에 url_project.sh 스크립트 파일이 있다. 해당 스크립트의 권한을 변경한다.
+      4. url_project.sh 스크립트를 실행한다.
       (해당 스크립트는 메이븐으로 시스템을 빌드한 후 프로젝트 실행까지 수행한다.)
       
       * 실행순서
