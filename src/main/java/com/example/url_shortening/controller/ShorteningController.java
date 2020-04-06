@@ -36,16 +36,24 @@ public class ShorteningController {
         Map<String, Object> result = new HashMap<>();
 
         String inputUrl = (String) param.get("inputUrl");
-
-        if (inputUrl == null || "".equals(inputUrl) || inputUrl.trim().length() == 0) {
-
-            return null;
-        }
-        inputUrl = inputUrl.trim();
         String message = "";
+        inputUrl = inputUrl.trim();
+        if (inputUrl == null || "".equals(inputUrl) || inputUrl.trim().length() == 0) {
+            message = "url을 입력해주세요.";
+            result.put("msg",message);
+            return result;
+        }
+        if(!inputUrl.startsWith("http://") && !inputUrl.startsWith("https://")){
+            message = "올바른 url을 입력해주세요.";
+            result.put("msg",message);
+            return result;
+        }
+
+
         if(!urlMapperSerivce.isValidUrl(inputUrl)){
            message="저장되지 않은 url이거나 올바른 url이 아닙니다.";
-            result.put("shortUrl",message);
+            result.put("msg",message);
+            return result;
         }
 
         else if(!urlMapperSerivce.isShortingURL(inputUrl)) {
@@ -55,6 +63,7 @@ public class ShorteningController {
             urlMapperSerivce.addRequestNum(inputUrl);
             result.put("shortUrl",message);
             result.put("requestNum", urlMapperSerivce.getRequestNum(inputUrl));
+
         }
         else{
             message = urlMapperSerivce.getOriginalURL(inputUrl);
