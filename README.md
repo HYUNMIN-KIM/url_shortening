@@ -4,6 +4,11 @@ url shortening project
 Url shortening 프로젝트는 긴 Url을 짧게 만들어서 짧은 url로 사용할 수 있도록 하는 프로젝트이다.
 
 
+개발환경
+JDK 1.8
+Springboot v2.2.6
+
+
 * 요구사항 정의
   1. url은 http:// 혹은 https://로 시작하는 것으로 한다.
   2. 짧은 Url과 원래 Url이 요청되었을 때 모두 요청 수 정보는 갱신된다.
