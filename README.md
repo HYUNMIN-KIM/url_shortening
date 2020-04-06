@@ -34,7 +34,7 @@ Springboot v2.2.6
       4. /url_project.sh
  
  
- 
+주소 : http://ipadress:8090
  
 *url_project.sh가 수행하는 것
 maven clean,
