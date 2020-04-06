@@ -82,7 +82,6 @@
     </tr>
     <tr>
         <td id="shortUrl"></td>
-        <td id="longUrl"></td>
         <td id="requestNum"></td>
     </tr>
     <br>
@@ -109,7 +108,6 @@
                     $("#resultPage").show();
                     $("#msg").hide();
                     $("#shortUrl").text(response.shortUrl);
-                    $("#longUrl"),text(response.longUrl);
                     $("#requestNum").text(response.requestNum);
                     console.log(response);
                 } if (response.msg !== undefined) {
