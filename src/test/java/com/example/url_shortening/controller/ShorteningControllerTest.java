@@ -61,13 +61,7 @@ public class ShorteningControllerTest {
 
     }
 
-//    @Test
-//    public void redirect() throws Exception {
-//        mockMvc.perform(get("/redirectURL"))
-//                .andExpect(status().isOk())
-//                .andDo(print())
-//                .andReturn();
-//    }
+
 
 
 }
