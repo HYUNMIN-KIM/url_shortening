@@ -24,8 +24,11 @@ Url shortening 프로젝트는 긴 Url을 짧게 만들어서 짧은 url로 사�
       3. chmod 755 url_project.sh
       4. /url_project.sh
  
+ 
+ 
       * url_project.sh가 수행하는 것.
        1. maven build
+       
        2. 프로젝트 실행.
       
       
